@@ -27,7 +27,7 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: java-app
+          name: Farmacia-1.0-SNAPSHOT
           path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
@@ -41,13 +41,13 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: java-app
+          name: Farmacia-1.0-SNAPSHOT
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'SistemaFarmaciaJSF'
+          app-name: 'SistemaFarmacia'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CC0FE9A67BBD4C84939DEAD3D26A565B }}
           package: '*.jar'
