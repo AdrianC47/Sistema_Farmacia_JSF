@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Login</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <script type="text/javascript">
+            function handleLoginRequest(xhr, status, args) {
+                if (args.validationFailed || !args.loggedIn) {
+                    PF('dlg').jq.effect("shake", {times: 5}, 100);
+                } else {
+                    PF('dlg').hide();
+                    $('#loginLink').fadeOut();
+                }
+            }
+        </script>
+    </h:head>
+    <h:body style="background-color: white;">
+        <h:form>        
+            <h1 style="text-align: center; font: ">Farmacia Farma Samma </h1>
+            <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
+                <p:graphicImage   name= "/img/login.jpg" style="width: 25%; margin-left: auto; margin-right: auto; display: block; border-style: solid; border-color: black"/>
+                <br></br>
+            </h:outputLink>
+            <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+
+            <p:dialog header="Inicio de Sesion" widgetVar="dlg" resizable="false">
+                <h:panelGrid columns="2" cellpadding="5">
+                    <h:outputLabel for="username" value="Usuario:" />
+                    <p:inputText id="username" value="#{usuarioCLave.usuario.usuario}" required="true" label="username" />
+
+                    <h:outputLabel for="password" value="Contraseña:" />
+                    <p:password id="password" value="#{usuarioCLave.usuario.contrasenia}" required="true" label="password" />
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Ingresar"  action="#{usuarioCLave.iniciarSesion}"
+                                         oncomplete="handleLoginRequest(xhr, status, args)" />
+                    </f:facet>  
+                </h:panelGrid>
+            </p:dialog>    
+        </h:form>
+    </h:body>
+    <ui:include src="menu/footer.xhtml" />
+</html>

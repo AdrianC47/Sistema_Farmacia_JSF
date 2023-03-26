@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       template="/WEB-INF/template.xhtml">
+    <h:head>
+        <title>Kardex</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <ui:include src="../menu/menuDinamico.xhtml" />
+    <h:body>
+        <div class="card">
+            <h:form id="formkardex">
+                <p:growl  id="mensajeGeneral3" sticky="false" showDetail="true"/>   
+                <p:dataTable id="products" var="k" value="#{kardexBean.list}" editable="true" styleClass="tabla"    
+                             rows="2"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} Registros"
+                             rowsPerPageTemplate="2,5,{ShowAll|'Todos'}">
+                    <p:ajax listener="#{kardexBean.edit(k)}"  event="rowEdit" update=":formkardex:mensajeGeneral3"/>
+
+                    <f:facet name="header">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                            <h1 style="text-align: center; color: white">Kardex</h1>
+                            <div>
+                                <p:commandButton  id="toggler" type="button" value="Columnas" icon="pi pi-align-justify"/>
+                                <p:columnToggler datasource="products" trigger="toggler"/>
+                            </div>
+                        </div>
+                    </f:facet>
+
+
+
+                    <p:column headerText="ID"     style="width: 60px">
+                        <f:facet name="header">Id</f:facet>#{k.id}
+                    </p:column>
+
+
+                    <p:column headerText="Fecha" style="width: 100px">
+
+                        <p:outputLabel value="#{kardexBean.asignarFecha(k)}"><f:convertDateTime pattern="dd-MM-yyyy" /></p:outputLabel>
+
+                    </p:column>
+                    <p:column headerText="Nombre Producto" style="width: 100px">
+                        <h:outputText value="#{k.detalle.producto.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Valor" style="width: 100px">
+                        <h:outputText value="#{k.detalle.subtotal}"/>
+                    </p:column>
+                    <p:column headerText="Entrada/Salida Dinero" style="width: 100px">
+                        <h:outputText value="#{k.signo}"/>
+                    </p:column>
+                    <p:column headerText="Total de Dinero" style="width: 100px">
+                        <h:outputText value="#{k.precioPonderado}"/>
+                    </p:column>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </p:dataTable>
+            </h:form>
+        </div>
+    </h:body>
+    <ui:include src="../menu/footer.xhtml" />
+</html>

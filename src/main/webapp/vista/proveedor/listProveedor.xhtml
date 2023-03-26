@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       template="/WEB-INF/template.xhtml">
+    <h:head>
+        <title>Lista de Proveedores</title>
+    </h:head>
+    <ui:include src="../menu/menuDinamico.xhtml" />
+    <h:body>
+        <div class="card">
+            <h:form id="frmExclos">
+                <p:growl  id="mensajeGeneral3" sticky="false" showDetail="true"/>    
+                <p:dataTable id="products" var="a" value="#{proveedorBean.list}" editable="true"
+                             rows="2"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} Registros"
+                             rowsPerPageTemplate="2,5,{ShowAll|'Todos'}">
+                    <p:ajax listener="#{proveedorBean.edit(a)}"  event="rowEdit" update=":frmExclos:mensajeGeneral3"/>
+
+                    <f:facet name="header">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                            <h1 style="text-align: center; color: white">Lista de Proveedores</h1>
+
+                            <div>
+                                <p:commandButton styleClass="ui-button-success" id="toggler" type="button" value="Columnas" icon="pi pi-align-justify"/>
+                                <p:columnToggler datasource="products" trigger="toggler"/>
+                            </div>
+                        </div>
+                    </f:facet>
+
+                    <p:column headerText="ID">
+                        <f:facet name="header">Id</f:facet>#{a.id} 
+                    </p:column>
+
+                    <p:column headerText="RUC">
+                        <f:facet name="header">RUC</f:facet>#{a.identificador} 
+                    </p:column>
+
+                    <p:column headerText="Nombre Empresa">
+                        <p:cellEditor> 
+                            <f:facet name="output">
+                                <h:outputText value="#{a.nombre}"  />
+                            </f:facet> 
+                            <f:facet name="input">
+                                <h:inputText value="#{a.nombre}" />
+                            </f:facet> 
+                        </p:cellEditor>
+
+                    </p:column>
+
+                    <p:column headerText="Telefono">
+                        <p:cellEditor> 
+                            <f:facet name="output">
+                                <h:outputText value="#{a.telefono}"  />
+                            </f:facet> 
+                            <f:facet name="input">
+                                <h:inputText value="#{a.telefono}" />
+                            </f:facet> 
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Direccion">
+                        <p:cellEditor> 
+                            <f:facet name="output">
+                                <h:outputText value="#{a.direccion}"  />
+                            </f:facet> 
+                            <f:facet name="input">
+                                <h:inputText value="#{a.direccion}" />
+                            </f:facet> 
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Correo">
+                        <p:cellEditor> 
+                            <f:facet name="output">
+                                <h:outputText value="#{a.correo}"  />
+                            </f:facet> 
+                            <f:facet name="input">
+                                <h:inputText value="#{a.correo}" />
+                            </f:facet> 
+                        </p:cellEditor>
+
+                    </p:column>
+
+
+                    <p:column headerText="Eliminar">
+                        <p:commandButton value="Eliminar" action="#{proveedorBean.delete(a)}" update="products" styleClass="ui-button-raised ui-button-danger"/>
+                    </p:column>
+                     <p:column headerText="Editar">
+                        <p:rowEditor />
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+    </h:body>
+    <ui:include src="../menu/footer.xhtml" />
+</html>

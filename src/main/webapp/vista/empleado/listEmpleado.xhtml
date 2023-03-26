@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       template="/WEB-INF/template.xhtml">
+    <h:head>
+        <title>Lista de Empleados</title>
+    </h:head>
+    <ui:include src="../menu/menuDinamico.xhtml" />
+    <h:body>
+        <div class="card">
+            <h:form id="frmExclos"> 
+                <p:growl  id="mensajeGeneral3" sticky="false" showDetail="true"/>   
+                <p:dataTable id="products" var="e" value="#{empleadoBean.listaEmpleado}" editable="true"
+                             rows="2"
+                             paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} Registros"
+                             rowsPerPageTemplate="2,5,{ShowAll|'Todos'}">
+                    <p:ajax listener="#{empleadoBean.edit(e)}"  event="rowEdit" update=":frmExclos:mensajeGeneral3"/>
+                    <f:facet name="header">
+                        <div class="p-d-flex p-jc-between p-ai-center">
+                            <h1 style="text-align: center; color: white">Lista de Empleados</h1>
+                            <div>
+                                <p:commandButton id="toggler" type="button" value="Columnas" icon="pi pi-align-justify"/>
+                                <p:columnToggler datasource="products" trigger="toggler"/>
+                            </div>
+                        </div>
+                    </f:facet>
+
+                    <p:column headerText="ID">
+                        <f:facet name="header">Id</f:facet>#{e.id} 
+                    </p:column>
+
+                    <p:column headerText="Cedula">
+
+                        <f:facet name="header">Cedula</f:facet>#{e.identificador}
+
+
+                    </p:column>
+
+                    <p:column headerText="Apellido">
+                        <p:cellEditor> 
+                            <f:facet name="output">
+                                <h:outputText value="#{e.apellido}"  />
+                            </f:facet> 
+                            <f:facet name="input">
+                                <h:inputText value="#{e.apellido}" />
+                            </f:facet> 
+                        </p:cellEditor>
+
+                    </p:column>
+
+                    <p:column headerText="Nombre">
+                        <p:cellEditor> 
+                            <f:facet name="output">
+                                <h:outputText value="#{e.nombre}"  />
+                            </f:facet> 
+                            <f:facet name="input">
+                                <h:inputText value="#{e.nombre}" />
+                            </f:facet> 
+                        </p:cellEditor>
+                    </p:column>
+
+                    <p:column headerText="Telefono">
+                        <p:cellEditor> 
+                            <f:facet name="output">
+                                <h:outputText value="#{e.telefono}"  />
+                            </f:facet> 
+                            <f:facet name="input">
+                                <h:inputText value="#{e.telefono}" />
+                            </f:facet> 
+                        </p:cellEditor>
+
+                    </p:column> 
+
+                    <p:column headerText="Direccion">
+                        <p:cellEditor> 
+                            <f:facet name="output">
+                                <h:outputText value="#{e.direccion}"  />
+                            </f:facet> 
+                            <f:facet name="input">
+                                <h:inputText value="#{e.direccion}" />
+                            </f:facet> 
+                        </p:cellEditor>
+
+                    </p:column>
+
+                    <p:column headerText="Sueldo">
+                        <p:cellEditor> 
+                            <f:facet name="output">
+                                <h:outputText value="#{e.sueldo}"  />
+                            </f:facet> 
+                            <f:facet name="input">
+                                <h:inputText value="#{e.sueldo}" />
+                            </f:facet> 
+                        </p:cellEditor>
+
+                    </p:column>
+                    <p:column headerText="Sucursal">
+                        <h:outputText value="#{e.sucursal.nombreClave}"    />
+                    </p:column>
+
+                    <p:column headerText="Correo">
+                        <p:cellEditor> 
+                            <f:facet name="output">
+                                <h:outputText value="#{e.correo}"  />
+                            </f:facet> 
+                            <f:facet name="input">
+                                <h:inputText value="#{e.correo}" />
+                            </f:facet> 
+                        </p:cellEditor>
+
+                    </p:column>
+
+                    <p:column headerText="Fecha de Ingreso">
+                        <h:outputText   value="#{e.fechaIngreso}">
+                            <f:convertDateTime pattern="dd-MM-yyyy" />
+                        </h:outputText>
+                    </p:column>
+ 
+
+                    <p:column headerText="Eliminar">
+                        <p:commandButton value="Eliminar" action="#{empleadoBean.delete(e)}" update="products" styleClass="ui-button-raised ui-button-danger"/>
+                    </p:column>
+                    <p:column headerText="Editar">
+                        <p:rowEditor />
+                    </p:column>
+
+                </p:dataTable>
+            </h:form>
+        </div>
+    </h:body>
+    <ui:include src="../menu/footer.xhtml" />
+</html>

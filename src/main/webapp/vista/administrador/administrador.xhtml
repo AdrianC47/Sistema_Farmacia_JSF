@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:f="http://xmlns.jcp.org/jsf/core"
+       xmlns:h="http://xmlns.jcp.org/jsf/html"
+       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+       xmlns:p="http://primefaces.org/ui"
+       template="/WEB-INF/template.xhtml">
+    <h:head>
+        <title>Administrador</title>
+        <h:outputScript name="limpiar.js" library="js" />
+    </h:head>
+    <ui:include src="../menu/menuDinamico.xhtml" />
+    <h:body>
+        <div class="container">
+            <div class="mx-auto"  style="margin-left: auto;margin-right: auto; width: 532px;" >
+                <div class="col">
+                </div>
+                <div class="col">
+                    <p:growl id="mensaje" showDetail="true"  />
+                    <h:form id="formulario" style="margin:20px;border-style: solid;border-width: 2" >
+                        <div class="card">
+                            <h2 style="text-align: center">Datos de Administrador</h2>
+                            <div class="p-grid ui-fluid">
+                                <div class="p-col-12 p-md-4">
+                                    <p:outputLabel for="txtCedula"  value="Cedula:"/>
+                                    <div class="ui-inputgroup">
+                                        <div  class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                                        <p:inputText id="txtCedula" placeholder="Cedula:" value="#{administradorBean.identificador}" required="true"/>
+                                    </div>
+
+                                    <p:outputLabel for="txtApellido" value="Apellido"/>
+                                    <div class="ui-inputgroup">
+
+                                        <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                                        <p:inputText id="txtApellido" placeholder="Apellido" value="#{administradorBean.apellido}" required="true"/>
+                                    </div>
+
+                                    <p:outputLabel for="txtNombre" value="Nombre:"/>
+                                    <div class="ui-inputgroup">
+
+                                        <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                                        <p:inputText id="txtNombre" placeholder="Nombre:" value="#{administradorBean.nombre}" required="true"/>
+                                    </div>
+
+                                    <p:outputLabel for="txtTelefono"  value="Telefono:"/>
+                                    <div class="ui-inputgroup">
+                                        <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                                        <p:inputText id="txtTelefono" placeholder="Telefono:" value="#{administradorBean.telefono}" required="true"/>
+                                    </div>
+
+                                    <p:outputLabel  for="txtDireccion" value="Direcion:"/>
+                                    <div class="ui-inputgroup">
+                                        <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                                        <p:inputText  id="txtDireccion" placeholder="Direccion:" value="#{administradorBean.direccion}" required="true"/>
+                                    </div>
+
+                                    <p:outputLabel for="txtCorreo" value="Correo:"/>
+                                    <div class="ui-inputgroup">
+                                        <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                                        <p:inputText id="txtCorreo" placeholder="Correo:" value="#{administradorBean.correo}" required="true"/>
+                                    </div>
+
+                                    <p:outputLabel for="txtUsuario" value="Usuario:"/>
+                                    <div class="ui-inputgroup">
+                                        <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                                        <p:inputText id="txtUsuario" placeholder="Usuario:" value="#{administradorBean.usuario}" required="true"/>
+                                    </div>
+
+                                    <p:outputLabel for="clave1" value="Contraseña:"/>
+                                    <div class="ui-inputgroup">
+                                        <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                                        <p:password id="clave1" placeholder="Contraseña:" value="#{administradorBean.contrasenia}"  match="clave2" promptLabel="Ingrese una Contraseña" 
+                                                    validatorMessage="Las Claves no coinciden" feedback="true"  weakLabel="Débil" strongLabel="Fuerte" required="true"
+                                                    goodLabel="Bueno"/>
+                                    </div>
+
+                                    <p:outputLabel value="Repetir Contraseña:"/>
+                                    <div class="ui-inputgroup">
+                                        <div class="ui-inputgroup-addon"><i class="pi pi-user"></i></div>
+                                        <p:password id="clave2" placeholder="Repetir Contraseña:" value="Repetir Contraseña"/>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="container" style=" margin-bottom: 15px" >
+                                <div class="row">
+                                    <div class="col">
+                                    </div>
+                                    <div class="col">
+                                        <p:commandButton  style="margin-right: 20px" actionListener="#{growlView.showInfo}"  update=":mensaje formulario"  value="Guardar" styleClass="ui-button-raised"  action="#{administradorBean.add}" />   
+
+
+                                    </div>
+                                    <div class="col">
+                                        <p:commandButton   value="Cancelar"  styleClass="ui-button-raised ui-button-danger" type="reset"  update="formulario"/>           
+
+
+                                    </div>
+                                    <div class="col">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </h:form>
+                </div>
+                <div class="col">
+
+                </div>
+
+            </div>
+        </div>
+    </h:body>
+    <ui:include src="../menu/footer.xhtml" />
+</html>
+
