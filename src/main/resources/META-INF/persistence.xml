@@ -4,7 +4,7 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
     <!-- Define Persistence Unit -->
     <persistence-unit name="Farmacia">
-        <!--<jta-data-source>jdbc/__Farmacia</jta-data-source>-->
+        <jta-data-source>jdbc/__Farmacia</jta-data-source>
   
         <properties>
             <property name="jakarta.persistence.schema-generation.database.action" 
